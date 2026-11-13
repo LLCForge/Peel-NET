@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="motd.txt" LogicalName="Updater.motd.txt" />
+  </ItemGroup>
+  <PropertyGroup>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,15 @@
+<Project>
+  <!-- Fixture örnekleri: zararsız küçük .NET Framework 4.8 programları. scripts/make-fixtures.js derler ve açık kaynak
+       gizleyicilerle (ConfuserEx 2, Obfuscar) gizler. Herhangi bir makinede derlenebilsin diye başvuru derlemeleri NuGet'ten. -->
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <Deterministic>true</Deterministic>
+    <DebugType>none</DebugType>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+</Project>

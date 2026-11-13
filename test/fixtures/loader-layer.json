@@ -1,0 +1,17 @@
+{
+  "gone": [],
+  "fx": [
+    "System.Reflection.Assembly::Load"
+  ],
+  "layers": 1,
+  "protection": false,
+  "file": "Loader.exe",
+  "expect": [
+    "\"Loader: unpacking stage 2\""
+  ],
+  "detect": [
+    "layer-captured",
+    "reflective-load"
+  ],
+  "verified": true
+}

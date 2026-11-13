@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Fixture aracı: ConfuserEx 2 (Confuser.MSBuild NuGet paketi, MIT) motorunu bir .crproj ile çalıştırır.
+       Paketteki MSBuild görevi yalnızca .NET Framework MSBuild'inde yüklenir; bu küçük çalıştırıcı aynı motoru
+       doğrudan çağırır. Obfuscar (MIT) da aynı geri yüklemeyle indirilir. Yalnızca Windows (.NET Framework 4.8). -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+    <PackageReference Include="Confuser.MSBuild" Version="1.6.0" PrivateAssets="all" ExcludeAssets="build" GeneratePathProperty="true" />
+    <PackageReference Include="Obfuscar" Version="2.2.50" PrivateAssets="all" ExcludeAssets="build" GeneratePathProperty="true" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="$(PkgConfuser_MSBuild)\netframework\Confuser.Core.dll" />
+    <Reference Include="$(PkgConfuser_MSBuild)\netframework\dnlib.dll" />
+    <None Include="$(PkgConfuser_MSBuild)\netframework\*.dll" CopyToOutputDirectory="PreserveNewest" Visible="false" />
+  </ItemGroup>
+  <Target Name="PeelToolPaths" AfterTargets="Build">
+    <WriteLinesToFile File="$(OutDir)obfuscar.path" Lines="$(PkgObfuscar)\tools\Obfuscar.Console.exe" Overwrite="true" />
+  </Target>
+</Project>

@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="payload.bin" LogicalName="Loader.payload.bin" Condition="Exists('payload.bin')" />
+  </ItemGroup>
+</Project>

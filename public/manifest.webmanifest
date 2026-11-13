@@ -1,0 +1,20 @@
+{
+  "name": "PEEL · .NET Deobfuscator",
+  "short_name": "PEEL .NET",
+  "description": "Open-source .NET deobfuscator that runs entirely in your browser. Works offline; your assemblies never leave your device.",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0c0a13",
+  "theme_color": "#0c0a13",
+  "categories": ["developer", "security", "utilities"],
+  "icons": [
+    { "src": "peel-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "peel-icon-1024.png", "sizes": "1024x1024", "type": "image/png", "purpose": "any" },
+    { "src": "peel-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "file_handlers": [
+    { "action": "./", "accept": { "application/x-msdownload": [".exe", ".dll"] } }
+  ]
+}

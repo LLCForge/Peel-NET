@@ -1,0 +1,15 @@
+{
+  "gone": [],
+  "fx": [],
+  "layers": 0,
+  "protection": false,
+  "file": "Greeter.exe",
+  "expect": [
+    "Console.WriteLine(\"Hello, \""
+  ],
+  "detect": [
+    "confuserex",
+    "proxy-calls"
+  ],
+  "verified": true
+}

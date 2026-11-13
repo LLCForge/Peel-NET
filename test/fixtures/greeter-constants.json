@@ -1,0 +1,20 @@
+{
+  "gone": [
+    "ConfusedBy"
+  ],
+  "fx": [],
+  "layers": 0,
+  "protection": false,
+  "file": "Greeter.exe",
+  "expect": [
+    "\"Hello, \"",
+    "\"Update channel: https://updates.example.com/greeter/stable\"",
+    "\"Level three\"",
+    "'='"
+  ],
+  "detect": [
+    "confuserex",
+    "string-encryption"
+  ],
+  "verified": true
+}

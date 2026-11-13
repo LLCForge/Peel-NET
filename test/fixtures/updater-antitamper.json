@@ -1,0 +1,13 @@
+{
+  "gone": [],
+  "fx": [],
+  "layers": 0,
+  "protection": false,
+  "file": "Updater.exe",
+  "expect": [],
+  "detect": [
+    "confuserex",
+    "anti-tamper"
+  ],
+  "verified": false
+}

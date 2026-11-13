@@ -1,0 +1,16 @@
+{
+  "gone": [],
+  "fx": [],
+  "layers": 0,
+  "protection": false,
+  "file": "MathKit.dll",
+  "expect": [
+    "\"abcdefghijklmnopqrstuvwxyz\"",
+    "\"negative input\"",
+    "\" (\""
+  ],
+  "detect": [
+    "obfuscar"
+  ],
+  "verified": true
+}

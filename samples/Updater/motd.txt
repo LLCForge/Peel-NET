@@ -1,0 +1,2 @@
+Welcome to the Peel-NET demo updater.
+Nothing here is real; it only exercises the analyser.

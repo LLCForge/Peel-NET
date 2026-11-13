@@ -1,0 +1,17 @@
+{
+  "gone": [],
+  "fx": [],
+  "layers": 0,
+  "protection": false,
+  "file": "MathKit.dll",
+  "expect": [
+    "\"abcdefghijklmnopqrstuvwxyz\"",
+    "\"negative input\"",
+    "\"positive \""
+  ],
+  "detect": [
+    "confuserex",
+    "string-encryption"
+  ],
+  "verified": true
+}

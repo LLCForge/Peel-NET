@@ -1,0 +1,21 @@
+{
+  "gone": [],
+  "fx": [
+    "System.Net.WebClient::DownloadString",
+    "System.IO.File::Exists"
+  ],
+  "layers": 1,
+  "protection": false,
+  "file": "Updater.exe",
+  "expect": [
+    "\"https://updates.peel-demo.invalid/channel/stable.txt\"",
+    "\"Updater.motd.txt\"",
+    "\"Checksum: \""
+  ],
+  "detect": [
+    "confuserex",
+    "string-encryption",
+    "resource-encryption"
+  ],
+  "verified": true
+}

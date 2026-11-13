@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk.WebAssembly">
+  <!-- Peel-NET motoru: .NET WebAssembly (browser-wasm). Tarayıcıda Web Worker'da, Node'da izin modeliyle
+       yalıtılmış alt süreçte çalışır. Derleme: npm run build:engine (dotnet publish → public/engine) -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>PeelNet.Engine</AssemblyName>
+    <RootNamespace>Peel</RootNamespace>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NoWarn>$(NoWarn);IL2026;IL2072;IL2075;IL2104;IL3050;CA1416</NoWarn>
+    <WasmEnableWebcil>true</WasmEnableWebcil>
+    <CompressionEnabled>false</CompressionEnabled>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="dnlib" Version="4.5.0" />
+    <PackageReference Include="ICSharpCode.Decompiler" Version="9.1.0.7988" />
+  </ItemGroup>
+  <!-- Örnek derlemeler .NET Framework (mscorlib) ya da .NET hedefler: yönlendirme derlemeleri ve sık kullanılan
+       kütüphaneler budanmaz ki sandbox'ta yüklenebilsinler. Engine'in kendisi de köklenir (Peel.Fx yansımayla çağrılır). -->
+  <ItemGroup>
+    <TrimmerRootAssembly Include="PeelNet.Engine" />
+    <TrimmerRootAssembly Include="mscorlib" />
+    <TrimmerRootAssembly Include="System" />
+    <TrimmerRootAssembly Include="System.Core" />
+    <TrimmerRootAssembly Include="netstandard" />
+    <TrimmerRootAssembly Include="System.Private.CoreLib" />
+    <TrimmerRootAssembly Include="System.Runtime" />
+    <TrimmerRootAssembly Include="System.Collections" />
+    <TrimmerRootAssembly Include="System.Collections.NonGeneric" />
+    <TrimmerRootAssembly Include="System.Collections.Specialized" />
+    <TrimmerRootAssembly Include="System.Linq" />
+    <TrimmerRootAssembly Include="System.Console" />
+    <TrimmerRootAssembly Include="System.Text.RegularExpressions" />
+    <TrimmerRootAssembly Include="System.Security.Cryptography" />
+    <TrimmerRootAssembly Include="System.IO.Compression" />
+    <TrimmerRootAssembly Include="System.Runtime.Numerics" />
+    <TrimmerRootAssembly Include="System.Net.Primitives" />
+    <TrimmerRootAssembly Include="System.Net.WebClient" />
+    <TrimmerRootAssembly Include="System.Net.Requests" />
+    <TrimmerRootAssembly Include="System.Net.Http" />
+    <TrimmerRootAssembly Include="System.Diagnostics.Process" />
+    <TrimmerRootAssembly Include="System.ComponentModel.Primitives" />
+  </ItemGroup>
+</Project>

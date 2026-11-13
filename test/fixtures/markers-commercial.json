@@ -1,0 +1,15 @@
+{
+  "gone": [],
+  "fx": [],
+  "layers": 0,
+  "protection": true,
+  "file": "Markers.dll",
+  "expect": [
+    "\"Hello, \""
+  ],
+  "detect": [
+    "smartassembly",
+    "babel"
+  ],
+  "verified": true
+}
