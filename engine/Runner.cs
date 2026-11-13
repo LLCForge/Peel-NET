@@ -67,6 +67,8 @@ public static class Runner
         // modül başlatıcısı kendi başına da çalıştırılır: DLL'lerde davranışın bir kısmı buradadır
         var init = Sandbox.Capture(() => System.Runtime.CompilerServices.RuntimeHelpers.RunModuleConstructor(asm.ManifestModule.ModuleHandle));
         if (main && hasEntry && init.Exception == null && !init.Exited) mainRun = Sandbox.Capture(() => Sandbox.InvokeEntry(asm));
+        // yoklamaların yan etkileri (sabit argümanlarla çağrılan yöntemler) rapordaki davranıştan ayrı tutulur
+        int mainFx = Fx.Calls.Count;
         var probeResults = new List<(int Token, List<string> Results)>();
         if (probes && init.Exception == null && !init.Exited)
         {
@@ -94,16 +96,21 @@ public static class Runner
             w.WriteBoolean("exited", init.Exited || mainRun?.Exited == true);
             w.WriteNumber("redirected", copy.Redirected);
             w.Strings("neutralized", copy.Neutralized);
-            w.WriteStartArray("fx");
-            foreach (var (api, args) in Fx.Calls)
+            void Calls(string name, IEnumerable<(string Api, string[] Args)> calls)
             {
-                w.WriteStartObject();
-                w.WriteString("api", api);
-                w.WriteString("cat", Watch.Category(api));
-                w.Strings("args", args.Select(JsonExt.Safe));
-                w.WriteEndObject();
+                w.WriteStartArray(name);
+                foreach (var (api, args) in calls)
+                {
+                    w.WriteStartObject();
+                    w.WriteString("api", api);
+                    w.WriteString("cat", Watch.Category(api));
+                    w.Strings("args", args.Select(JsonExt.Safe));
+                    w.WriteEndObject();
+                }
+                w.WriteEndArray();
             }
-            w.WriteEndArray();
+            Calls("fx", Fx.Calls.Take(mainFx));
+            Calls("probeFx", Fx.Calls.Skip(mainFx));
             w.WriteNumber("layers", Fx.Layers.Count);
             w.WriteStartArray("probes");
             foreach (var (token, results) in probeResults)

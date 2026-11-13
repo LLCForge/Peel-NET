@@ -23,6 +23,7 @@ function snapshotOf(r, ignore = new Set()) {
     init: excType(r.init),
     exited: Boolean(r.exited),
     fx: JSON.stringify(fx.map((f) => [f.api, f.args])),
+    probeFx: JSON.stringify((r.probeFx ?? []).filter((f) => !ignore.has(f.api)).map((f) => [f.api, f.args])),
     layers: ignore.size ? 0 : r.layers ?? 0,
     probes: new Map((r.probes ?? []).map((p) => [p.token, JSON.stringify(p.results)])),
   };
@@ -31,13 +32,13 @@ function snapshotOf(r, ignore = new Set()) {
 /** iki temel çalıştırmada farklı çıkan alanlar (zaman, rastgelelik) karşılaştırmadan çıkarılır */
 function unstableOf(a, b) {
   const u = new Set();
-  for (const k of ['ran', 'out', 'exception', 'init', 'exited', 'fx', 'layers']) if (a[k] !== b[k]) u.add(k);
+  for (const k of ['ran', 'out', 'exception', 'init', 'exited', 'fx', 'probeFx', 'layers']) if (a[k] !== b[k]) u.add(k);
   for (const [tok, v] of a.probes) if (b.probes.get(tok) !== v) u.add(`probe:${tok}`);
   return u;
 }
 
 function diff(base, next, unstable) {
-  for (const k of ['ran', 'out', 'exception', 'init', 'exited', 'fx', 'layers']) if (!unstable.has(k) && base[k] !== next[k]) return k;
+  for (const k of ['ran', 'out', 'exception', 'init', 'exited', 'fx', 'probeFx', 'layers']) if (!unstable.has(k) && base[k] !== next[k]) return k;
   for (const [tok, v] of base.probes) {
     if (unstable.has(`probe:${tok}`)) continue;
     if (next.probes.get(tok) !== v) return `probe 0x${tok.toString(16)}`;

@@ -1,13 +1,15 @@
 import { t } from '../i18n.js';
 
 // LCS tablosu n*m hücre: büyük dosyada belleği patlatmasın (ortak önek/sonek bu sınırın dışında)
-const MAX_CELLS = 4_000_000;
+// .NET çıktısı (ayrıştırılmış C#) binlerce satır olabilir: hücreler 16 bit (LCS uzunluğu en kısa tarafı aşmaz)
+const MAX_CELLS = 24_000_000;
 const ROW_H = 20;
 
 function lcs(a, b) {
   const n = a.length;
   const m = b.length;
-  const dp = Array.from({ length: n + 1 }, () => new Uint32Array(m + 1));
+  const Cells = Math.min(n, m) < 65535 ? Uint16Array : Uint32Array;
+  const dp = Array.from({ length: n + 1 }, () => new Cells(m + 1));
   for (let i = n - 1; i >= 0; i--) {
     for (let j = m - 1; j >= 0; j--) {
       dp[i][j] = a[i] === b[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);

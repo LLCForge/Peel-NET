@@ -190,7 +190,8 @@ public static class Inspector
         var peResources = mod.Resources.OfType<EmbeddedResource>().Where(r => IsPe(r)).Select(r => r.Name.String).ToList();
         if (peResources.Count > 0)
             dets.Add(new Det { Id = "embedded-assemblies", Name = "Gömülü PE/derlemeler", Kind = "technique", Confidence = 0.9, Evidence = peResources.Take(5).Select(n => "kaynak: " + n).ToList() });
-        if (memberRefs.Keys.Any(k => k is "System.Reflection.Assembly::Load" or "System.AppDomain::Load") && (memberRefs.ContainsKey("System.Reflection.MethodBase::Invoke") || memberRefs.ContainsKey("System.Reflection.Assembly::get_EntryPoint")))
+        // gizleyicinin çalışma zamanındaki yükleme (ConfuserEx resources) sayılmaz: yalnızca kullanıcı kodu
+        if (userRefs.Keys.Any(k => k is "System.Reflection.Assembly::Load" or "System.AppDomain::Load") && (userRefs.ContainsKey("System.Reflection.MethodBase::Invoke") || userRefs.ContainsKey("System.Reflection.Assembly::get_EntryPoint")))
             dets.Add(new Det { Id = "reflective-load", Name = "Bellekten derleme yükleme", Kind = "technique", Confidence = 0.8, Evidence = { "Assembly.Load + EntryPoint/Invoke" } });
 
         return Json.Of(w =>
